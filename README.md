@@ -1,0 +1,92 @@
+# PDF & Invoice Data Extraction API
+
+A production-ready API for extracting structured data from PDFs, invoices, resumes, and bank statements using OCR and text parsing.
+
+## Features
+
+- **Multi-Format Support**: Invoices, Resumes, Bank Statements, and Generic Documents.
+- **Smart Parsing**: Hybrid approach using Text Extraction (PyMuPDF) and OCR (Tesseract).
+- **Security**: API Key authentication and input validation.
+- **Performance**: Async processing, aimed at < 2s response time for standard documents.
+- **Deployment**: Docker-ready.
+
+## Tech Stack
+
+- **Framework**: FastAPI (Python)
+- **PDF Core**: PyMuPDF (fitz)
+- **OCR Engine**: Tesseract
+- **Image Proc**: OpenCV
+- **Storage**: PostgreSQL (for logging metadata)
+
+## Setup & Installation
+
+### Local Development (Virtual Env)
+
+1. **Clone & Setup**
+   ```bash
+   python -m venv .venv
+   .venv\Scripts\activate  # Windows
+   pip install -r requirements.txt
+   ```
+
+2. **Environment**
+   Update `.env` with your configuration.
+   Ensure Tesseract OCR is installed on your system.
+   - Windows: [Download Installer](https://github.com/UB-Mannheim/tesseract/wiki)
+   - Update `TESSERACT_CMD` in `.env` to point to your `tesseract.exe`.
+
+3. **Run Server**
+   ```bash
+   uvicorn app.main:app --reload
+   ```
+
+### Docker
+
+```bash
+docker build -t pdf-extractor .
+docker run -p 8000:8000 pdf-extractor
+```
+
+## API Usage
+
+**Base URL**: `http://localhost:8000`
+
+### Authentication
+Include the `x-api-key` header in all requests. Default key: `change_this_to_a_super_secret_key`
+
+### Extract Endpoint
+
+**POST** `/api/v1/extract`
+
+**Curl Example**:
+```bash
+curl -X POST "http://localhost:8000/api/v1/extract" \
+  -H "accept: application/json" \
+  -H "x-api-key: change_this_to_a_super_secret_key" \
+  -H "Content-Type: multipart/form-data" \
+  -F "file=@/path/to/invoice.pdf" \
+  -F "document_type=invoice" \
+  -F "language=en"
+```
+
+**Parameters**:
+- `file`: PDF or Image file (max 10MB).
+- `document_type`: `invoice` | `resume` | `bank` | `auto`.
+- `language`: `auto` | `en` | `hi`.
+- `output_format`: `json`.
+
+## Pricing Suggestions
+
+This API is designed to be a high-value service. Suggested pricing models:
+
+- **Pay-Per-Use**: ₹5 - ₹20 per document depending on volume.
+- **Tiered Subscription**:
+  - **Starter**: ₹999/mo (100 docs)
+  - **Business**: ₹4,999/mo (1000 docs)
+  - **Enterprise**: Custom pricing for high volume + SLA.
+
+## Limitations
+
+- **Complex Layouts**: Highly unstructured documents may require custom parsing logic.
+- **Handwriting**: OCR accuracy on handwritten text varies.
+- **PostgreSQL**: Currently configured for metadata logging only.

@@ -1,0 +1,14 @@
+fastapi
+uvicorn
+python-multipart
+pymupdf
+pytesseract
+opencv-python-headless
+sqlalchemy
+psycopg2-binary
+pydantic
+pydantic-settings
+python-dotenv
+aiofiles
+# paddlepaddle==2.6.2 # Commented out for now to ensure basic setup works first, can be added if needed
+# paddleocr>=2.0.6    # Commented out for now
