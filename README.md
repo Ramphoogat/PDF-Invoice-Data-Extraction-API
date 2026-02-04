@@ -104,15 +104,20 @@ curl -X POST "http://localhost:8000/api/v1/extract" \
 }
 ```
 
-## Pricing Suggestions
+## Pricing Plans
 
-This API is designed to be a high-value service. Suggested pricing models:
+Choose the plan that fits your volume.
 
-- **Pay-Per-Use**: ₹5 - ₹20 per document depending on volume.
-- **Tiered Subscription**:
-  - **Starter**: ₹999/mo (100 docs)
-  - **Business**: ₹4,999/mo (1000 docs)
-  - **Enterprise**: Custom pricing for high volume + SLA.
+### Pay-Per-Use
+- **Flexible**: ₹5 - ₹20 per document (volume dependent)
+
+### Subscriptions
+
+| Plan | Price | Includes |
+| :--- | :--- | :--- |
+| **Starter** | ₹999 / mo | 100 documents |
+| **Business** | ₹4,999 / mo | 1,000 documents |
+| **Enterprise** | Custom | High volume + SLA + Priority Support |
 
 ## Limitations
 
