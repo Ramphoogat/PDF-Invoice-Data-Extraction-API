@@ -75,6 +75,35 @@ curl -X POST "http://localhost:8000/api/v1/extract" \
 - `language`: `auto` | `en` | `hi`.
 - `output_format`: `json`.
 
+**JSON Response Example**:
+```json
+{
+  "filename": "invoice.pdf",
+  "document_type": "invoice",
+  "processing_time_ms": 1250.5,
+  "data": {
+    "invoice_number": "INV-2024-001",
+    "invoice_date": "2024-02-05",
+    "seller_name": "Acme Corp",
+    "buyer_name": "John Doe",
+    "gst_or_tax_id": "22AAAAA0000A1Z5",
+    "line_items": [
+      {
+        "description": "Consulting Services",
+        "quantity": 10.0,
+        "unit_price": 100.0,
+        "total": 1000.0
+      }
+    ],
+    "subtotal": 1000.0,
+    "tax": 180.0,
+    "grand_total": 1180.0,
+    "currency": "INR",
+    "confidence_score": 0.95
+  }
+}
+```
+
 ## Pricing Suggestions
 
 This API is designed to be a high-value service. Suggested pricing models:
